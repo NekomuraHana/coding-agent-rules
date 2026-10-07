@@ -12,7 +12,7 @@ AI コーディングエージェントに実装や技術文書の作成・変�
 - `rules/python.md` : Python 向けルール
 - `rules/javascript.md` : JavaScript 向けルール
 - `rules/documentation.md` : README、仕様書、設計資料等の技術文書向けルール
-- `rules/windows-desktop.md` : C++ / C# 等の Windows デスクトップ GUI アプリケーション向けルール
+- `rules/windows-desktop.md` : MFC / Win32 / Windows Forms / WPF / WinUI 等の Windows デスクトップ GUI アプリケーション向けルール
 
 ## 使い方
 
@@ -20,7 +20,20 @@ AI コーディングエージェントに実装や技術文書の作成・変�
 
 README、仕様書、設計資料等の技術文書を作成・変更する場合は、`rules/documentation.md` も適用します。
 
-C++ / C# 等で Windows デスクトップ GUI アプリケーションを扱う場合は、`rules/windows-desktop.md` も適用します。
+Windows デスクトップ GUI アプリケーションでは、言語別ルールとは別に `rules/windows-desktop.md` を明示的に適用します。  
+特に MFC プロジェクトでは、C++ であることだけを理由にこのルールが自動的に適用されることを前提とせず、プロジェクト側の `AGENTS.md` 等から参照先を明記します。
+
+例えば MFC プロジェクトでは、次のように指定します。
+
+```text
+このプロジェクトは MFC を使用する Windows GUI アプリケーションです。
+実装・変更時は、次のルールを必ず参照してください。
+
+- coding-agent-rules/rules/common.md
+- coding-agent-rules/rules/windows-desktop.md
+```
+
+C# の Windows Forms / WPF / WinUI 等でも、同様に `rules/windows-desktop.md` を明示的に適用します。
 
 プロジェクト固有の制約がある場合は、このリポジトリの内容を直接増やし続けるのではなく、各プロジェクト側に追加ルールを置きます。
 
@@ -43,6 +56,7 @@ AI は実装担当または文書編集担当であり、プロジェクト全�
 
 - テスト方針
 - Git / PR の運用ルール
+- C++ / C# 向け言語別ルール
 - 組み込み向け追加ルール
 - Node.js / Browser JavaScript の差分
 - MicroPython 向け追加ルール
