@@ -13,6 +13,7 @@ MFC や C# の Windows GUI アプリケーションを扱うプロジェクト�
 ```text
 Windows GUI アプリケーションの実装・変更では、
 coding-agent-rules/rules/common.md と
+coding-agent-rules/rules/c-plus.md と
 coding-agent-rules/rules/windows-desktop.md を必ず参照すること。
 ```
 
