@@ -25,9 +25,13 @@
 ## 3. 例外処理
 
 - 例外を通常の分岐処理の代用にしない。
-- catch した例外を理由なく握り潰さない。
+- 外部 I/O、framework、library 等が例外で失敗を通知する場合は、回復・記録・変換を行える適切な境界で処理する。
+- ファイル、network、database 等の API 呼び出しで例外が発生し得る場合でも、タイムアウト、not found、入力不正、再試行可能な通信失敗等をアプリケーション上の通常結果として扱う設計なら、上位層では Result / status / Try pattern 等へ変換する。
+- `TryParse`、`TryGetValue` 等、失敗が通常ケースとして想定された API が提供されている場合は、例外を発生させる方法よりそれらを優先する。
+- catch は、回復、エラー形式の変換、必要なログ記録等を実際に行える箇所に置き、理由なく握り潰さない。
 - 元の stack trace を維持して再送出する場合は `throw;` を使用し、`throw ex;` を使用しない。
 - 外部 API や I/O の例外を変換する場合は、呼び出し側が必要とする情報を失わない。
+- `OperationCanceledException` / `TaskCanceledException` 等、framework が制御状態を例外として表現するものは、通常の障害と同一視せず既存の cancellation 方針に従う。
 - 独自例外型は、呼び出し側が種類を識別する実益がある場合だけ追加する。
 
 ## 4. async / await
